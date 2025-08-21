@@ -1,33 +1,51 @@
-# TheGamingRoom
-Client and software requirements
+# The Gaming Room — Draw It or Lose It
 
-The client was The Gaming Room, creators of Draw It or Lose It (a team-based guessing game inspired by Win, Lose or Draw). They asked me to design a cloud-ready, multi-platform version that supports multiple concurrent games, unique teams and players, timed rounds, and synchronized state across clients. Key requirements included: a single authoritative game instance per game code, unique names for teams/players across the system, a clean separation between game logic and presentation, and scalability to web and mobile clients without duplicating business logic.
+The Gaming Room project designs a scalable, cloud-ready version of *Draw It or Lose It*, a multiplayer guessing game inspired by *Win, Lose or Draw*. This repository contains the completed Software Design Document (SDD), which outlines the requirements, architecture, and design patterns to support multiple teams, unique players, and synchronized gameplay across platforms.
 
-What I did particularly well
+---
 
-I documented a clear domain model and service boundaries that separated core game rules from UI concerns. I also chose patterns (notably Singleton for the game registry and Iterator for round progression) that simplified concurrency and state management. My architecture section mapped each requirement to specific design decisions, which made the traceability from need → design → implementation easy for both the client and developers.
+## Client and Software Requirements
+The client, **The Gaming Room**, wanted a cloud-based, multi-platform version of their game *Draw It or Lose It*. The system needed to:
+- Support multiple concurrent games.
+- Enforce unique team and player names.
+- Provide synchronized state across all devices.
+- Scale to web and mobile clients.
+- Separate game logic from presentation.
 
-What in the design-document process helped the coding
+---
 
-Writing out constraints, assumptions, and non-functional requirements up front removed guesswork during implementation. Capturing API contracts, data models, and state diagrams early let me stub endpoints and test logic before the UI was finished. The decision log (with rejected alternatives) saved time later when questions resurfaced, because I could point to the trade-offs we had already evaluated.
+## Reflection
 
-What I would revise and how
+### What I Did Well
+I clearly documented the domain model and used appropriate design patterns, such as Singleton for the game registry and Iterator for round progression. Each requirement was mapped directly to design decisions, making the document easy to follow for both the client and developers.
 
-I would expand the scalability and deployment section with concrete load expectations, autoscaling policies, and failure scenarios (e.g., what happens if the match service restarts mid-round). I’d add sequence diagrams for lobby creation and join flows, plus more explicit rate limits and idempotency rules for APIs to harden the design against double-clicks and flaky networks.
+### What Helped During Development
+Writing the design document forced me to clarify constraints and assumptions early. Defining API contracts and state diagrams ahead of time streamlined implementation and reduced guesswork.
 
-Interpreting and implementing user needs
+### What I Would Revise
+I would expand the scalability and deployment section with concrete load expectations, autoscaling policies, and failure recovery scenarios. Adding sequence diagrams for lobby creation and join flows would also strengthen the document.
 
-User needs centered on fast matchmaking, fair play, zero name conflicts, and smooth cross-device play. I translated those into requirements like globally unique team/player names, atomic lobby joins, a single source of truth for game state, and stateless APIs with WebSocket updates for low-latency round timers. Considering user needs is critical because it shapes the architecture toward reliability and clarity—if the experience stutters, allows duplicate names, or desyncs timers, users will churn regardless of feature count.
+### Interpreting User Needs
+User needs focused on fast matchmaking, fair play, and smooth cross-device experiences. I translated these into features like globally unique names, atomic lobby joins, and stateless APIs with WebSocket updates. Meeting user needs is critical to ensure reliability and engagement.
 
-My approach to designing the software (techniques and future use)
+### My Design Approach
+I used an iterative approach:
+1. Define constraints and success metrics.  
+2. Model the domain (Game, Team, Player, Round).  
+3. Establish service boundaries and APIs.  
+4. Select design patterns intentionally.  
+5. Document non-functional requirements and map them to technical tactics.  
+6. Maintain a decision log.  
 
-I followed a lightweight, iterative approach:
-	•	Clarify constraints and success metrics.
-	•	Model the domain (entities like Game, Team, Player, Round; invariants like uniqueness and one-active-round).
-	•	Define service boundaries and data contracts before UI.
-	•	Choose patterns intentionally (Singleton for registries, Iterator/State for rounds, Repository for persistence).
-	•	Document non-functionals (scalability, security, availability) and map them to concrete tactics (stateless services, centralized cache, optimistic concurrency).
-	•	Maintain a decision log.
+In future projects, I would continue this process but add load testing targets and failure scenarios earlier in the design phase.
 
-In future, I’d repeat this flow but add earlier load testing targets and chaos scenarios to pressure-test the game loop and real-time updates before feature expansion.
+---
 
+## Repository Contents
+- `SoftwareDesignDocument.pdf` – The completed design document for The Gaming Room.
+- `README.md` – This file, with reflection on the project.
+
+---
+
+## About
+This project was created as part of my coursework to demonstrate software design, documentation, and communication skills with clients and development teams.
