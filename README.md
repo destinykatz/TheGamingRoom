@@ -42,7 +42,7 @@ In future projects, I would continue this process but add load testing targets a
 ---
 
 ## Repository Contents
-- `SoftwareDesignDocument.pdf` – The completed design document for The Gaming Room.
+- `DesignDocument` – The completed design document for The Gaming Room.
 - `README.md` – This file, with reflection on the project.
 
 ---
